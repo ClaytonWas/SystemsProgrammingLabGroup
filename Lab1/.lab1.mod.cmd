@@ -1,0 +1,1 @@
+cmd_/home/clayton/Desktop/SystemsProgramming/Labs/Lab1/lab1.mod := printf '%s\n'   lab1.o | awk '!x[$$0]++ { print("/home/clayton/Desktop/SystemsProgramming/Labs/Lab1/"$$0) }' > /home/clayton/Desktop/SystemsProgramming/Labs/Lab1/lab1.mod
