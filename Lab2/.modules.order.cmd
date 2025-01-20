@@ -1,0 +1,1 @@
+cmd_/home/clayton/Desktop/SystemsProgramming/Labs/Lab2/modules.order := {   echo /home/clayton/Desktop/SystemsProgramming/Labs/Lab2/lab2.ko; :; } > /home/clayton/Desktop/SystemsProgramming/Labs/Lab2/modules.order
