@@ -16,7 +16,6 @@ int main() {
 
 
     } else if (pid1 == 0) {
-
       
         // Inside the first child process
 
@@ -33,13 +32,11 @@ int main() {
         // else it would be the parent which is child 1 
         else if (pid2 == 0) {
             
-            printf("*************************Child of First Child*************************\n");
             printf("Child of First Child: PID = %d\n", getpid());
         } 
         else {
             
-            printf("*************************First Child*************************\n");
-            printf("First Child Process: PID = %d, My Child PID = %d\n", getpid(), pid2);
+            printf("First Child: PID = %d\n", getpid());
         }
     //**************************end of child 1 */
 
@@ -61,14 +58,13 @@ int main() {
         //if pid 2 is 0 another child for parent will be created
         // else it would be parent 
         else if (pid2 == 0) {
-            printf("*************************Second Child (by Parent)*************************\n");
-            printf("Second Child Process (by Parent): PID = %d\n", getpid());
+            printf("Second Child (by Parent): PID = %d\n", getpid());
         }
          else {
-            printf("*************************Parent*************************\n");
-            printf("Parent Process: PID = %d, First Child PID = %d, Second Child PID = %d\n", getpid(), pid1, pid2);
+            printf("Parent: PID = %d\n", getpid());
         }
     }
+
 
     return 0; 
 }
