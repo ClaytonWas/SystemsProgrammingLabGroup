@@ -1,1 +1,19 @@
-*.exe
+# Ignore compiled binaries
+fork_1
+fork_2
+fork_2_2
+
+# Ignore object files
+*.o
+
+# Ignore other build artifacts
+*.out
+*.a
+*.so
+
+# Ignore editor/IDE-specific files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
