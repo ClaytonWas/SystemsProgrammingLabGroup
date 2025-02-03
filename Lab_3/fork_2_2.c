@@ -28,16 +28,16 @@ int main() {
     // if pid 2 is 0 we are in the second child
     if (pid1 == 0 && pid2 == 0) {
         // pid 1 is 0 so we are in the first child and because pid2 is zero we are in the child of the first child process which is child of the child
-        printf("Child of First Child: PID = %d\n", getpid());
+        printf("Process D, Grandchild, PID = %d\n", getpid());
     } else if (pid1 == 0 && pid2 > 0) {
         // pid 1 is 0 so we are in the first child and because pid2 is greater than zero its the parent and parent of what is under first child is first child
-        printf("First Child: PID = %d\n", getpid());
+        printf("Process B, First Child, PID = %d\n", getpid());
     } else if (pid1 > 0 && pid2 == 0) {
         // because pid 1 is not zero we are in parent and because pid 2 is zero we are in the second child of the parent
-        printf("Second Child (by Parent): PID = %d\n", getpid());
+        printf("Process C, Second Child, PID = %d\n", getpid());
     } else if (pid1 > 0 && pid2 > 0) {
         // we are in parent because poth pids are not 0
-        printf("Parent: PID = %d\n", getpid());
+        printf("Process A, Parent, PID = %d\n", getpid());
     }
 
     return 0; 

@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 
 # Target executable
-TARGET = fork_2_2
+TARGET = q1
 
 # Default rule to build the program
 all: $(TARGET)
