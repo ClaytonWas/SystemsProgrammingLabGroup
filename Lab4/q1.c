@@ -3,7 +3,7 @@
 #include <sys/wait.h>
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
+    if (argc != 3 && argc != 1) {
         fprintf(stderr, "Error: %s expects 2 additional arguments. You passed %d \n.", argv[0], argc-1);
         return 1;
     }
@@ -12,6 +12,12 @@ int main(int argc, char *argv[]) {
     //every time a fork is done pid will change
     pid = fork();
 
+    char *cmd1[] = {"ls", NULL};
+    char *cmd2[] = {"ls", NULL};
+    if (argc == 3) {
+        cmd1[0] = argv[1];
+        cmd2[0] = argv[2];
+    }
 
     // fork should never be negetive
     if (pid < 0) {
@@ -19,23 +25,20 @@ int main(int argc, char *argv[]) {
         return 1; 
     } else if (pid == 0) {
     // fork id of parent is never 0
-        char *cmd[] = {argv[1], NULL};
-
         printf("I am a child process with id: %d \n", getpid());
-        printf("I'll execute: %s \n", argv[1]);
-        printf("Below are the results for: %s \n \n", argv[1]);
+        printf("I'll execute: %s \n", cmd1[0]);
+        printf("Below are the results for: %s \n \n", cmd1[0]);
 
-        execvp(cmd[0], cmd);
+        execvp(cmd1[0], cmd1);
         perror("execvp");
     } else {
-        char *cmd[] = {argv[2], NULL};
         wait(NULL);
 
         printf("\nI am a parent process with id: %d \n", getpid());
-        printf("I'll execute: %s \n", argv[2]);
-        printf("Below are the results for: %s \n \n", argv[2]);
+        printf("I'll execute: %s \n", cmd2[0]);
+        printf("Below are the results for: %s \n \n", cmd2[0]);
 
-        execvp(cmd[0], cmd);
+        execvp(cmd2[0], cmd2);
         perror("execvp");
     }
 
