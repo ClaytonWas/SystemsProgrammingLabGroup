@@ -1,45 +1,42 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 
-int main(int argc, char *argv[]) {
-    if (argc != 3 && argc != 1) {
-        fprintf(stderr, "Error: %s expects 2 additional arguments. You passed %d \n.", argv[0], argc-1);
-        return 1;
-    }
+int main(int argc, char* argv[])  {
     //process idenifier type for system calls return ids
     pid_t pid;
+    // let the argument list be what is in the command promt
+    char* argument_list1[] = {argv[1], NULL};
+    // let the argument list be what is in the command promt
+    char* argument_list2[] = {argv[2], NULL};
+
     //every time a fork is done pid will change
     pid = fork();
 
-    char *cmd1[] = {"ls", NULL};
-    char *cmd2[] = {"ls", NULL};
-    if (argc == 3) {
-        cmd1[0] = argv[1];
-        cmd2[0] = argv[2];
-    }
-
+    
     // fork should never be negetive
     if (pid < 0) {
         fprintf(stderr, "Fork failed");
         return 1; 
     } else if (pid == 0) {
     // fork id of parent is never 0
-        printf("I am a child process with id: %d \n", getpid());
-        printf("I'll execute: %s \n", cmd1[0]);
-        printf("Below are the results for: %s \n \n", cmd1[0]);
 
-        execvp(cmd1[0], cmd1);
-        perror("execvp");
+        printf("****************************************************\n");
+        printf("im running %s\n",argv[1]);
+        printf("I am a child process with id: %d \n also exe should run here\n", getpid());
+        execvp(argv[1], argument_list1);
+        printf("I'll execute: command1 \n");
+        printf("Below are the results for: command1 \n");
     } else {
+
         wait(NULL);
-
-        printf("\nI am a parent process with id: %d \n", getpid());
-        printf("I'll execute: %s \n", cmd2[0]);
-        printf("Below are the results for: %s \n \n", cmd2[0]);
-
-        execvp(cmd2[0], cmd2);
-        perror("execvp");
+        printf("****************************************************\n");
+        printf("im running %s\n",argv[2]);
+        printf("I am a parent process with id: %d \n\n", getpid());
+        execvp(argv[2], argument_list2);
+        printf("I'll execute: command2 \n");
+        printf("Below are the results for: command2 \n \n");
     }
 
 
