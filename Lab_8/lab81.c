@@ -6,11 +6,11 @@
 void fileToString(char fileName[], char buffer[], int bufferSize) {
     FILE *file = fopen(fileName, "r");
 
+    // read first line and discard it and then read the second line
     fgets(buffer, bufferSize, file);
     fgets(buffer, bufferSize, file);
 
     buffer[strcspn(buffer, "\n")] = '\0';
-
 
     printf("%s\n", buffer);
 
