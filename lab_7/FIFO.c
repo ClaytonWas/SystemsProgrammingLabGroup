@@ -65,10 +65,10 @@ void managePageFrames(int pageNumber) {
 }
 
 int main() {
-    int pages[SIZE] = {1, 2, 3, 4}; // case 1
+    //int pages[SIZE] = {1, 2, 3, 4}; // case 1
     //int pages[SIZE] = {1, 1, 2, 3}; // case 2
     //int pages[SIZE] = {1, 2, 2, 3}; // case 3
-    //int pages[SIZE] = {1, 1, 1, 1}; // case 4
+    int pages[SIZE] = {1, 1, 1, 1}; // case 4
     //int pages[SIZE] = {1, 3, 0, 3}; //custom case
     memset(pageFrames, -1, sizeof(pageFrames));
     
