@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
 
     // Create socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
+    printf("Client socket initalized!\n");
 
     // Set up server address struct
     serv_addr.sin_family = AF_INET;
@@ -27,11 +28,14 @@ int main(int argc, char *argv[]) {
 
     // Connect to server
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    printf("Connection established\n");
 
     // Send Fahrenheit value to server
     snprintf(buffer, BUFFER_SIZE, "%.2f", atof(argv[1]));
     send(sock, buffer, strlen(buffer), 0);
     printf("Temperature in Fahrenheit sent: %s\n", buffer);
+
+    memset(buffer, 0, sizeof(buffer));
 
     // Receive Celsius value from server
     read(sock, buffer, BUFFER_SIZE);

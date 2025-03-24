@@ -16,7 +16,8 @@ int main() {
 
     // Create socket
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
- 
+    printf("Server socket created!\n");
+
     // Bind socket to IP and PORT
     int opt = 1;
     setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
@@ -28,17 +29,27 @@ int main() {
     
     // Bind the socket to the specified port
     bind(server_fd, (struct sockaddr *)&address, sizeof(address));
- 
-    printf("Server is running...\n");
- 
+    if (server_fd == -1) {
+        printf("Connection Failed: Terminating Server.\n");
+        close(server_fd);
+        return 0;
+    }    
+    printf("Socket bound successfully\n");
+  
     // Listen for incoming connections with a backlog of 3
     listen(server_fd, 3);
- 
+    printf("Listening to socket\n");
+
     // Accept a client connection
+    printf("Accepting new connections!\n");
     client_fd = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
- 
-    printf("Connected to client.\n");
- 
+    if (client_fd == -1) {
+        printf("Connection Failed: Terminating Server.\n");
+        close(server_fd);
+        return 0;
+    }    
+    printf("Connection Established\n");
+
     // Receive the temperature (in Fahrenheit) from the client
     int bytesRead = read(client_fd, buffer, BUFFER_SIZE);
      
@@ -51,7 +62,7 @@ int main() {
  
     // Format the Celsius value to two decimal places
     snprintf(temp_c, sizeof(temp_c), "%.2f", tempC);
-    printf("Converted temperature (C): %s\n", temp_c);
+    printf("Converted temperature (C): %s \n", temp_c);
  
     // Send the formatted Celsius temperature back to the client
     send(client_fd, temp_c, strlen(temp_c), 0);
